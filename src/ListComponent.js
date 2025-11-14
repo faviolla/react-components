@@ -3,31 +3,37 @@ import ListItemComponent from "./ListItemComponent";
 
 const ListComponent = () => {
   const [input, setInput] = useState("");
-  const [item, setItem] = useState(["First element"]);
+  const [items, setItem] = useState([]);
 
-  let count = 0;
   const onClickHandler = (input) => {
-    const updatedElement = [...item, input];
-    count++;
-
+    const updatedElement = [...items, input];
     setItem(updatedElement);
     setInput("");
   };
 
-  
   const onChangeHandler = (e) => {
     const value = e.target.value;
     setInput(value);
   };
 
+  const onEnterHandler = (e) => {
+    if (e.key == "Enter") {
+      const updatedElement = [...items, input];
+      setItem(updatedElement);
+      setInput("");
+    }
+  };
+
   return (
     <>
       <h1>TODO List</h1>
-      <input onChange={onChangeHandler} value={input} />
-      <p>{count}</p>
+      <input onKeyDown={onEnterHandler} onChange={onChangeHandler} value={input} />
+      <p>{items.length}</p>
       <ul>
-        {item.map((element, index) => (
-          <ListItemComponent element={element} index={index} />
+        {items.map((element, index) => (
+          <>
+            <ListItemComponent element={element} index={index} />
+          </>
         ))}
       </ul>
       <button onClick={() => onClickHandler(input)}>Add TODO element</button>
