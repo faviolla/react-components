@@ -4,7 +4,7 @@ const CounterComponent = () => {
   const [count, setCount] = useState(0);
 
   const increment = () => {
-    setCount((prevState) => (prevState + 1));
+    setCount((prevState) => prevState + 1);
   };
 
   const decrement = () => {
@@ -13,8 +13,8 @@ const CounterComponent = () => {
   return (
     <div>
       <p>{count}</p>
-      <button onClick={increment}>+</button>
       <button onClick={decrement}>-</button>
+      <button onClick={increment}>+</button>
     </div>
   );
 };

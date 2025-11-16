@@ -27,7 +27,7 @@ const ListComponent = () => {
   return (
     <>
       <h1>TODO List</h1>
-      <input onKeyDown={onEnterHandler} onChange={onChangeHandler} value={input} />
+      <input onKeyDown={onEnterHandler} onChange={onChangeHandler} value={input} placeholder="new task" />
       <p>{items.length}</p>
       <ul>
         {items.map((element, index) => (
