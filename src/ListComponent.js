@@ -1,12 +1,18 @@
 import { useState } from "react";
 import ListItemComponent from "./ListItemComponent";
+import ButtonComponent from "./ButtonComponent";
 
 const ListComponent = () => {
+  const initialValues = [
+    { id: 1, name: "first" },
+    { id: 2, name: "second" },
+    { id: 3, name: "third" },
+  ];
   const [input, setInput] = useState("");
-  const [items, setItem] = useState([]);
+  const [items, setItem] = useState(initialValues);
 
   const onClickHandler = (input) => {
-    const updatedElement = [...items, input];
+    const updatedElement = [...items, { id: 5, name: input }];
     setItem(updatedElement);
     setInput("");
   };
@@ -18,10 +24,16 @@ const ListComponent = () => {
 
   const onEnterHandler = (e) => {
     if (e.key == "Enter") {
-      const updatedElement = [...items, input];
+      const updatedElement = [...items, { id: items.length + 1, name: input }];
       setItem(updatedElement);
       setInput("");
     }
+  };
+
+  const handleDelete = (id) => {
+    const filteredItems = items.filter((item) => item.id !== id);
+    setItem(filteredItems);
+    console.log("delete");
   };
 
   return (
@@ -30,9 +42,11 @@ const ListComponent = () => {
       <input onKeyDown={onEnterHandler} onChange={onChangeHandler} value={input} placeholder="new task" />
       <p>{items.length}</p>
       <ul>
-        {items.map((element, index) => (
+        {items.map((element) => (
           <>
-            <ListItemComponent element={element} index={index} />
+            <ListItemComponent key={element.id} id={element.id} name={element.name}>
+              {<ButtonComponent text={"delete"} onClick={() => handleDelete(element.id)} type={"button"} />}
+            </ListItemComponent>
           </>
         ))}
       </ul>

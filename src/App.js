@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <RenderComponent />
-        {/* <ListComponent /> */}
+        {/* <RenderComponent /> */}
+        <ListComponent />
         {/* <CounterComponent /> */}
       </header>
     </div>

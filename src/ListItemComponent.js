@@ -2,9 +2,10 @@ import React from "react";
 
 const ListItemComponent = (props) => {
   return (
-    <li key={`${props.element}${props.index}`}>
-      {props.element} {props.index}
-    </li>
+    <>
+      <li key={props.id}>{props.name}</li>
+      {props.children}
+    </>
   );
 };
 
